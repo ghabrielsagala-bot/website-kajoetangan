@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import 'tailwindcss';
+
+@layer base {
+    * {
+        @apply antialiased;
+    }
+
+    body {
+        @apply bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50;
+        font-family: 'Inter', 'Montserrat', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        @apply font-bold;
+    }
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+}
