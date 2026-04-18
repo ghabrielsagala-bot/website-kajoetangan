@@ -45,7 +45,7 @@ KKH | Feedback Page
                     </div>
                     @endif
 
-                    <form action="{{ route('user.feedback.store') }}" method="POST" class="space-y-5 sm:space-y-6">
+                    <form action="{{ route('feedback.store') }}" method="POST" class="space-y-5 sm:space-y-6">
                         @csrf
 
                         <!-- Nama Lengkap -->

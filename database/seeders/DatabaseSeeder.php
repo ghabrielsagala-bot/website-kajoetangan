@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             TicketSeeder::class,
+            KulinerSeeder::class,
+            SpotFotoSeeder::class,
+            EventSeeder::class,
+            AwardSeeder::class,
         ]);
 
         // User::factory(10)->create();

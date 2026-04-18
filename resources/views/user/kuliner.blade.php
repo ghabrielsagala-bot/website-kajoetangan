@@ -1,6 +1,10 @@
-@extends('template')
+@extends('Templates.User.User-template')
 
-@section('main')
+@section('title')
+KKH | {{ $data->nama_kuliner }}
+@endsection
+
+@section('body')
 <main class="bg-gray-50 min-h-screen pt-8 pb-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         

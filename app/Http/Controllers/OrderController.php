@@ -38,7 +38,7 @@ class OrderController extends Controller
         $validated = $request->validate([
             'nama_awalan' => 'required|string|max:100',
             'email' => 'required|email|max:255',
-            'tenis_tiket' => 'required|in:Lokal,Mancanegara',
+            'jenis_tiket' => 'required|in:Lokal,Mancanegara',
             'metode_pembayaran' => 'required|in:Gopay,QRIS',
             'jumlah_tiket' => 'required|integer|min:1',
             'total_harga' => 'required|integer|min:0',
@@ -76,7 +76,7 @@ class OrderController extends Controller
         $validated = $request->validate([
             'nama_awalan' => 'required|string|max:100',
             'email' => 'required|email|max:255',
-            'tenis_tiket' => 'required|in:Lokal,Mancanegara',
+            'jenis_tiket' => 'required|in:Lokal,Mancanegara',
             'metode_pembayaran' => 'required|in:Gopay,QRIS',
             'jumlah_tiket' => 'required|integer|min:1',
             'total_harga' => 'required|integer|min:0',
