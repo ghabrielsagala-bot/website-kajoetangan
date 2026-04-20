@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = [
         'nama_awalan',
         'email',
-        'jenis_tiket',
+        'tenis_tiket',
         'metode_pembayaran',
         'jumlah_tiket',
         'total_harga',
