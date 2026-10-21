@@ -1,92 +1,94 @@
 @extends('Templates.User.User-template')
 
 @section('title')
-KKH | Event & Acara
+KKH | Event Kajoetangan
 @endsection
 
 @section('body')
-<main class="bg-gray-50 min-h-screen py-6 sm:py-8 md:py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Back Button -->
-        <div class="mb-6 md:mb-8">
-            <a href="{{ route('user.beranda.index') }}" class="inline-flex items-center gap-2 px-4 py-2 text-amber-900 hover:bg-amber-50 rounded-lg transition-colors duration-300">
-                <i class="fas fa-arrow-left text-sm"></i>
-                <span class="text-sm font-medium">Kembali ke Beranda</span>
-            </a>
-        </div>
-
-        <!-- Header Section -->
-        <div class="text-center mb-10 sm:mb-12 md:mb-16">
-            <div class="flex items-center justify-center mb-4 sm:mb-6">
-                <hr class="flex-1 border-gray-300">
-                <span class="px-4 text-gray-500 text-sm sm:text-base">
-                    <!-- Divider -->
-                </span>
-                <hr class="flex-1 border-gray-300">
-            </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-                Event & Acara
-            </h1>
-            
-            <p class="text-gray-700 text-sm sm:text-base md:text-lg px-2 sm:px-4">
-                Ikuti berbagai acara menarik dan event spesial yang diselenggarakan di Kadjoetangan
+<main class="min-h-screen bg-[#FFFCF5] px-4 py-12 font-body sm:px-6 sm:py-16 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+        <!-- EVENT SECTION -->
+        <header class="mb-12 text-center sm:mb-16">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#4A3627]">Jelajahi Kajoetangan</p>
+            <h1 class="font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl">Agenda &amp; Kehidupan Kampung</h1>
+            <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-700 sm:text-base">
+                Dari acara kampung hingga musik di lorong, kegiatan Kajoetangan mengajak pengunjung merasakan suasana heritage bersama warga.
             </p>
+        </header>
+
+        <div class="relative">
+            <div class="absolute bottom-4 left-5 top-4 w-px bg-[#4A3627]/20 sm:left-8" aria-hidden="true"></div>
+            <div class="space-y-6">
+                <article class="relative pl-14 sm:pl-20">
+                    <span class="absolute left-0 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#FFFCF5] bg-[#4A3627] text-white sm:left-3">
+                        <i class="fas fa-calendar-star text-sm"></i>
+                    </span>
+                    <div class="rounded-2xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7">
+                        <div class="mb-3 flex flex-wrap items-center gap-2">
+                            <span class="rounded-full bg-[#4A3627]/10 px-3 py-1 text-xs font-semibold text-[#4A3627]">Agenda tahunan</span>
+                            <span class="text-xs text-gray-600">Tanggal diumumkan penyelenggara</span>
+                        </div>
+                        <h2 class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Festival Kajoetangan</h2>
+                        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-gray-700">
+                            Perayaan suasana kampung heritage yang menghadirkan warga, budaya, dan kegiatan untuk pengunjung. Cek pengumuman resmi untuk tanggal dan rangkaian acara terbaru.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-14 sm:pl-20">
+                    <span class="absolute left-0 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#FFFCF5] bg-[#4A3627] text-white sm:left-3">
+                        <i class="fas fa-music text-sm"></i>
+                    </span>
+                    <div class="rounded-2xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7">
+                        <div class="mb-3 flex flex-wrap items-center gap-2">
+                            <span class="rounded-full bg-[#4A3627]/10 px-3 py-1 text-xs font-semibold text-[#4A3627]">Akhir pekan</span>
+                            <span class="text-xs text-gray-600">Jadwal penampilan dapat berubah</span>
+                        </div>
+                        <h2 class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Live Musik Keroncong &amp; Akustik Jalanan</h2>
+                        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-gray-700">
+                            Musik jalanan menambah suasana saat pengunjung menyusuri lorong. Pertunjukan umumnya hadir pada akhir pekan; konfirmasi jadwal kepada pengelola sebelum berkunjung.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="relative pl-14 sm:pl-20">
+                    <span class="absolute left-0 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#FFFCF5] bg-[#4A3627] text-white sm:left-3">
+                        <i class="fas fa-store text-sm"></i>
+                    </span>
+                    <div class="rounded-2xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7">
+                        <div class="mb-3 flex flex-wrap items-center gap-2">
+                            <span class="rounded-full bg-[#4A3627]/10 px-3 py-1 text-xs font-semibold text-[#4A3627]">Akhir pekan</span>
+                            <span class="text-xs text-gray-600">Ikuti pengumuman warga</span>
+                        </div>
+                        <h2 class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Pasar Krempyeng</h2>
+                        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-gray-700">
+                            Pasar warga yang menghadirkan jajanan dan produk lokal di suasana kampung. Hari dan jam penyelenggaraan dapat berbeda, jadi periksa informasi terbaru dari pengelola.
+                        </p>
+                    </div>
+                </article>
+            </div>
         </div>
 
-        <!-- Grid List -->
-        @if($data->count() > 0)
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            @foreach($data as $event)
-            <a href="{{ route('event.show', $event->event_id) }}" class="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div class="relative overflow-hidden h-48 sm:h-56 md:h-64 bg-gray-200">
-                    <img src="{{ asset('storage/' . $event->gambar_event) }}" 
-                         alt="{{ $event->nama_event }}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-amber-900 text-xs sm:text-sm font-semibold">
-                        {{ $event->jenis_event }}
-                    </div>
+        @if(isset($data) && $data->count())
+            <section class="mt-16" aria-labelledby="events-list-heading">
+                <div class="mb-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#4A3627]">Informasi dari pengelola</p>
+                    <h2 id="events-list-heading" class="mt-2 font-display text-2xl font-bold text-gray-900">Agenda Lainnya</h2>
                 </div>
-                
-                <div class="p-4 sm:p-5 md:p-6">
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-900 transition-colors line-clamp-2 mb-2">
-                        {{ $event->nama_event }}
-                    </h3>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="flex items-center gap-1 text-xs sm:text-sm text-gray-600 bg-amber-50 px-3 py-1 rounded-full">
-                            <i class="fas fa-calendar-days text-amber-900"></i>
-                            {{ \Carbon\Carbon::parse($event->waktu_event)->format('d M Y') }}
-                        </span>
-                        <span class="flex items-center gap-1 text-xs sm:text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full">
-                            <i class="fas fa-location-dot text-blue-900"></i>
-                            {{ $event->lokasi_event }}
-                        </span>
-                    </div>
-                    
-                    <p class="text-gray-600 text-sm sm:text-base line-clamp-2 mb-4">
-                        {{ $event->deskripsi_event }}
-                    </p>
-                    
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs sm:text-sm text-gray-500">
-                            Oleh: {{ $event->penyelenggara_event }}
-                        </span>
-                        <span class="text-amber-900 font-semibold group-hover:translate-x-1 transition-transform text-sm">
-                            Selengkapnya →
-                        </span>
-                    </div>
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    @foreach($data as $event)
+                        <a href="{{ route('event.show', $event->event_id) }}" class="group rounded-2xl border border-[#4A3627]/10 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-[#4A3627]/40 hover:shadow-lg">
+                            <div class="flex items-start justify-between gap-4">
+                                <span class="rounded-full bg-[#4A3627]/10 px-3 py-1 text-xs font-semibold text-[#4A3627]">{{ $event->jenis_event }}</span>
+                                <span class="shrink-0 text-xs text-gray-600">{{ \Carbon\Carbon::parse($event->waktu_event)->translatedFormat('d M Y') }}</span>
+                            </div>
+                            <h3 class="mt-4 font-display text-lg font-bold text-gray-900">{{ $event->nama_event }}</h3>
+                            <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-gray-700">{{ $event->deskripsi_event }}</p>
+                            <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#4A3627]">Detail agenda <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i></span>
+                        </a>
+                    @endforeach
                 </div>
-            </a>
-            @endforeach
-        </div>
-        @else
-        <div class="bg-white rounded-lg shadow-md p-8 sm:p-12 text-center">
-            <i class="fas fa-calendar-alt text-4xl sm:text-5xl text-gray-300 mb-4"></i>
-            <p class="text-gray-600 text-base sm:text-lg">Data event belum tersedia saat ini</p>
-        </div>
+            </section>
         @endif
     </div>
 </main>

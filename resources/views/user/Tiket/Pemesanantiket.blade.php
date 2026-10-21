@@ -1,176 +1,300 @@
+@extends('Templates.User.User-template')
 
+@section('title')
+KKH | Pemesanan Tiket — Kampoeng Heritage Kajoetangan
+@endsection
 
+@section('body')
+<main class="flex-grow bg-[#FFFCF5] px-4 py-10 font-body sm:px-6 sm:py-14 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        {{-- Page heading --}}
+        <header class="mb-9 max-w-3xl">
+            <p class="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#4A3627]">
+                <span class="h-px w-8 bg-[#4A3627]"></span>
+                Kampoeng Heritage Kajoetangan
+            </p>
+            <h1 class="font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl">
+                Pemesanan Tiket
+            </h1>
+            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-gray-700 sm:text-base">
+                Rencanakan kunjungan Anda dan nikmati perjalanan menyusuri kisah heritage di jantung Kota Malang.
+            </p>
+        </header>
 
-@extends('template')
+        <form action="{{ route('pembayaran.index') }}" method="POST" id="ticket-booking-form" class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+            @csrf
 
-@section('main')
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
-        
-        .font-heritage { font-family: 'Playfair Display', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
-        
-        .bg-cream-page { background-color: #FFFCF5; }
-        .bg-beige-input { background-color: #F5F5DC; }
-        .bg-brown-dark { background-color: #4A3627; }
-        .bg-red-heritage { background-color: #9D3838; }
-        .text-brown-dark { color: #4A3627; }
-    </style>
-
-    <main class="bg-cream-page min-h-screen font-body flex flex-col justify-between">
-        
-        <div class="flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-10 md:pt-20 md:pb-24 w-full">
-            
-            <!-- Header Section -->
-            <div class="text-center mb-8 sm:mb-10 md:mb-12 w-full max-w-2xl">
-                <h1 class="text-2xl sm:text-3xl md:text-5xl font-heritage font-bold text-black mb-2 sm:mb-3 leading-tight">
-                    Pemesanan Tiket
-                </h1>
-                <p class="text-gray-700 text-sm sm:text-base md:text-lg px-2 sm:px-4">
-                    Pesan tiket untuk mendapat pengalaman berharga di Kampung Kajoetangan
-                </p>
-            </div>
-
-            <!-- Form Container -->
-            <div class="w-full max-w-sm sm:max-w-md md:max-w-lg bg-transparent">
-                <form action="{{ route('pembayaran.index') }}" method="POST" class="space-y-5 sm:space-y-6">
-                    @csrf
-
-                    <!-- Pilih Tiket -->
-                    <div class="flex flex-col">
-                        <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Pilih Tiket</label>
-                        <div class="relative">
-                            <select id="ticketType" name="ticket_type" required class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 pr-10 text-gray-700 appearance-none focus:ring-2 focus:ring-amber-900 focus:outline-none cursor-pointer text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200">
-                                <option value="0" data-price="0">--- Pilih Jenis Tiket ---</option>
-                                <option value="lokal" data-price="5000">Tiket Pengunjung Lokal - Rp 5.000</option>
-                                <option value="mancanegara" data-price="10000">Tiket Pengunjung Mancanegara - Rp 10.000</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 sm:px-4 text-gray-600">
-                                <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
-                            </div>
+            {{-- Checkout form --}}
+            <div class="space-y-6 lg:col-span-8">
+                {{-- Step 1: Visitor details --}}
+                <section class="rounded-xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="visitor-heading">
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#4A3627] font-semibold text-white">1</span>
+                        <div>
+                            <h2 id="visitor-heading" class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Detail Pengunjung</h2>
+                            <p class="mt-1 text-sm text-gray-600">Masukkan informasi untuk pemesanan tiket.</p>
                         </div>
                     </div>
 
-                    <!-- Jumlah Tiket -->
-                    <div class="flex flex-col">
-                        <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Jumlah Tiket</label>
-                        <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200">
-                    </div>
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <div>
+                            <label for="visitor-name" class="mb-2 block text-sm font-semibold text-gray-800">Nama Lengkap</label>
+                            <input id="visitor-name" name="name" type="text" value="{{ old('name') }}" required maxlength="100" autocomplete="name" placeholder="Nama lengkap Anda"
+                                class="w-full rounded-lg border border-[#4A3627]/20 bg-[#FFFCF5] px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                            @error('name')<p class="mt-1.5 text-sm text-red-700">{{ $message }}</p>@enderror
+                        </div>
 
-                    <!-- Total Display -->
-                    <div class="bg-white rounded-lg p-4 sm:p-5 border-2 border-amber-900/20 shadow-sm">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-700 font-medium text-sm sm:text-base">Total Biaya:</span>
-                            <div class="text-right">
-                                <span class="text-2xl sm:text-3xl md:text-4xl font-heritage font-bold text-black">
-                                    Rp <span id="totalDisplay">0</span>
-                                </span>
-                                <p class="text-xs text-gray-500 mt-1">Belum termasuk pajak</p>
-                            </div>
+                        <div>
+                            <label for="visitor-email" class="mb-2 block text-sm font-semibold text-gray-800">Email</label>
+                            <input id="visitor-email" name="email" type="email" value="{{ old('email') }}" required maxlength="100" autocomplete="email" placeholder="nama@email.com"
+                                class="w-full rounded-lg border border-[#4A3627]/20 bg-[#FFFCF5] px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                            @error('email')<p class="mt-1.5 text-sm text-red-700">{{ $message }}</p>@enderror
+                        </div>
+
+                        <div>
+                            <label for="visitor-phone" class="mb-2 block text-sm font-semibold text-gray-800">No. WhatsApp</label>
+                            <input id="visitor-phone" name="phone" type="tel" value="{{ old('phone') }}" required maxlength="30" autocomplete="tel" placeholder="08xxxxxxxxxx"
+                                class="w-full rounded-lg border border-[#4A3627]/20 bg-[#FFFCF5] px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                            @error('phone')<p class="mt-1.5 text-sm text-red-700">{{ $message }}</p>@enderror
+                        </div>
+
+                        <div>
+                            <label for="visit-date" class="mb-2 block text-sm font-semibold text-gray-800">Tanggal Kunjungan</label>
+                            <input id="visit-date" name="visit_date" type="date" value="{{ old('visit_date') }}" min="{{ now()->toDateString() }}" required
+                                class="w-full rounded-lg border border-[#4A3627]/20 bg-[#FFFCF5] px-4 py-3 text-sm text-gray-900 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                            @error('visit_date')<p class="mt-1.5 text-sm text-red-700">{{ $message }}</p>@enderror
+                        </div>
+                    </div>
+                </section>
+
+                {{-- Step 2: Ticket type --}}
+                <section class="rounded-xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="ticket-heading">
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#4A3627] font-semibold text-white">2</span>
+                        <div>
+                            <h2 id="ticket-heading" class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Pilih Jenis Tiket</h2>
+                            <p class="mt-1 text-sm text-gray-600">Pilih kategori tiket yang sesuai untuk kunjungan Anda.</p>
                         </div>
                     </div>
 
-                    <!-- Info Box -->
-                    <div class="bg-amber-50 border-l-4 border-amber-900 rounded-r-lg p-4 sm:p-5">
-                        <p class="text-xs sm:text-sm text-gray-700">
-                            <span class="font-semibold text-amber-900">ℹ️ Informasi:</span> Tiket lokal untuk warga Indonesia, tiket mancanegara untuk wisatawan internasional.
-                        </p>
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <label for="ticket-domestic" class="ticket-card relative flex cursor-pointer rounded-xl border-2 border-[#4A3627]/20 bg-[#FFFCF5] p-5 transition-colors hover:border-[#4A3627]/60 focus-within:ring-2 focus-within:ring-[#4A3627]">
+                            <input id="ticket-domestic" class="peer sr-only" type="radio" name="ticket_type" value="lokal" data-price="5000" checked>
+                            <span class="pointer-events-none absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border border-[#4A3627]/40 text-transparent peer-checked:border-[#4A3627] peer-checked:bg-[#4A3627] peer-checked:text-white">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </span>
+                            <span class="block">
+                                <span class="mb-3 inline-flex rounded-md bg-[#4A3627]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-[#4A3627]">Domestik</span>
+                                <span class="block font-display text-lg font-bold text-gray-900">Tiket Domestik</span>
+                                <span class="mt-2 block text-sm text-gray-600">Untuk pengunjung dalam negeri.</span>
+                                <span class="mt-4 block text-lg font-bold text-[#4A3627]">Rp 5.000 <span class="text-sm font-normal text-gray-600">/ orang</span></span>
+                            </span>
+                        </label>
+
+                        <label for="ticket-international" class="ticket-card relative flex cursor-pointer rounded-xl border-2 border-[#4A3627]/20 bg-[#FFFCF5] p-5 transition-colors hover:border-[#4A3627]/60 focus-within:ring-2 focus-within:ring-[#4A3627]">
+                            <input id="ticket-international" class="peer sr-only" type="radio" name="ticket_type" value="mancanegara" data-price="10000">
+                            <span class="pointer-events-none absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border border-[#4A3627]/40 text-transparent peer-checked:border-[#4A3627] peer-checked:bg-[#4A3627] peer-checked:text-white">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </span>
+                            <span class="block">
+                                <span class="mb-3 inline-flex rounded-md bg-[#4A3627]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-[#4A3627]">International</span>
+                                <span class="block font-display text-lg font-bold text-gray-900">Tiket Mancanegara</span>
+                                <span class="mt-2 block text-sm text-gray-600">Untuk pengunjung dari luar negeri.</span>
+                                <span class="mt-4 block text-lg font-bold text-[#4A3627]">Rp 10.000 <span class="text-sm font-normal text-gray-600">/ orang</span></span>
+                            </span>
+                        </label>
+                    </div>
+                    @error('ticket_type')<p class="mt-3 text-sm text-red-700">{{ $message }}</p>@enderror
+                </section>
+
+                {{-- Step 3: Ticket quantity --}}
+                <section class="rounded-xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="quantity-heading">
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#4A3627] font-semibold text-white">3</span>
+                        <div>
+                            <h2 id="quantity-heading" class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Jumlah Tiket</h2>
+                            <p class="mt-1 text-sm text-gray-600">Tentukan jumlah tiket yang ingin dipesan.</p>
+                        </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-[#2D2D2D] hover:bg-black active:bg-gray-900 text-white text-base sm:text-lg font-semibold py-3 sm:py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-amber-900/30 focus:outline-none mt-2 sm:mt-4">
-                        Lanjut ke Pembayaran
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </form>
+                    <div class="flex w-fit items-center gap-5 rounded-xl border border-[#4A3627]/15 bg-[#FFFCF5] p-2">
+                        <button type="button" id="quantity-minus" aria-label="Kurangi jumlah tiket" class="flex h-11 w-11 items-center justify-center rounded-lg border border-[#4A3627]/20 text-lg font-semibold text-[#4A3627] transition-colors hover:bg-[#4A3627]/5 focus:outline-none focus:ring-2 focus:ring-[#4A3627]">−</button>
+                        <output id="quantity-display" class="min-w-8 text-center text-lg font-bold text-gray-900" aria-live="polite">1</output>
+                        <button type="button" id="quantity-plus" aria-label="Tambah jumlah tiket" class="flex h-11 w-11 items-center justify-center rounded-lg bg-[#4A3627] text-lg font-semibold text-white transition-colors hover:bg-[#36271a] focus:outline-none focus:ring-2 focus:ring-[#4A3627] focus:ring-offset-2">+</button>
+                        <input type="hidden" id="quantity-input" name="quantity" value="1">
+                    </div>
+                    @error('quantity')<p class="mt-2 text-sm text-red-700">{{ $message }}</p>@enderror
+                </section>
+
+                {{-- Step 4: Payment method --}}
+                <section class="rounded-xl border border-[#4A3627]/10 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="payment-heading">
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#4A3627] font-semibold text-white">4</span>
+                        <div>
+                            <h2 id="payment-heading" class="font-display text-xl font-bold text-gray-900 sm:text-2xl">Metode Pembayaran</h2>
+                            <p class="mt-1 text-sm text-gray-600">Pilih metode pembayaran yang Anda inginkan.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Metode pembayaran">
+                        <label for="payment-qris" class="payment-card flex cursor-pointer items-center gap-3 rounded-xl border-2 border-[#4A3627]/20 bg-[#FFFCF5] p-4 transition-colors hover:border-[#4A3627]/60 focus-within:ring-2 focus-within:ring-[#4A3627]">
+                            <input id="payment-qris" class="sr-only" type="radio" name="payment_method" value="qris" checked>
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-[#4A3627] shadow-sm"><i class="fas fa-qrcode text-xl"></i></span>
+                            <span><span class="block font-semibold text-gray-900">QRIS</span><span class="mt-0.5 block text-xs text-gray-600">Scan &amp; bayar</span></span>
+                        </label>
+                        <label for="payment-transfer" class="payment-card flex cursor-pointer items-center gap-3 rounded-xl border-2 border-[#4A3627]/20 bg-[#FFFCF5] p-4 transition-colors hover:border-[#4A3627]/60 focus-within:ring-2 focus-within:ring-[#4A3627]">
+                            <input id="payment-transfer" class="sr-only" type="radio" name="payment_method" value="transfer">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-[#4A3627] shadow-sm">BCA<br>/ MANDIRI</span>
+                            <span><span class="block font-semibold text-gray-900">Transfer Bank</span><span class="mt-0.5 block text-xs text-gray-600">BCA / Mandiri</span></span>
+                        </label>
+                        <label for="payment-ewallet" class="payment-card flex cursor-pointer items-center gap-3 rounded-xl border-2 border-[#4A3627]/20 bg-[#FFFCF5] p-4 transition-colors hover:border-[#4A3627]/60 focus-within:ring-2 focus-within:ring-[#4A3627]">
+                            <input id="payment-ewallet" class="sr-only" type="radio" name="payment_method" value="ewallet">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-[#4A3627] shadow-sm">GoPay<br>/ OVO</span>
+                            <span><span class="block font-semibold text-gray-900">E-Wallet</span><span class="mt-0.5 block text-xs text-gray-600">GoPay / OVO</span></span>
+                        </label>
+                    </div>
+                    @error('payment_method')<p class="mt-3 text-sm text-red-700">{{ $message }}</p>@enderror
+                </section>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <footer class="bg-brown-dark text-white pt-10 sm:pt-12 md:pt-16 mt-8">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 pb-8 sm:pb-12">
-                
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <h2 class="font-heritage text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Kampoeng Kadjoetangan Heritage</h2>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-xs mb-4 sm:mb-6">
-                        Warisan budaya dan sejarah yang kaya dari Malang, menampilkan keindahan arsitektur kolonial dan kehidupan tradisional.
-                    </p>
-                    
-                    <div class="border-t border-white/20 w-24 mb-3 sm:mb-4"></div>
-                    <p class="text-xs text-gray-400 mb-2 sm:mb-3">Media Sosial Kami</p>
-                    
-                    <div class="flex space-x-2 sm:space-x-3 justify-center md:justify-start">
-                        <a href="#" class="bg-white text-brown-dark w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="YouTube">
-                            <i class="fab fa-youtube text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-brown-dark w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Instagram">
-                            <i class="fab fa-instagram text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-brown-dark w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Twitter">
-                            <i class="fab fa-twitter text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-brown-dark w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Facebook">
-                            <i class="fab fa-facebook text-sm"></i>
-                        </a>
+            {{-- Sticky order summary --}}
+            <aside class="lg:col-span-4">
+                <section class="overflow-hidden rounded-xl border border-[#4A3627]/20 bg-white shadow-md lg:sticky lg:top-8" aria-labelledby="summary-heading">
+                    <div class="border-b border-dashed border-[#4A3627]/25 bg-[#4A3627]/5 px-6 py-5">
+                        <p class="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#4A3627]">Kampoeng Heritage Kajoetangan</p>
+                        <h2 id="summary-heading" class="font-display text-2xl font-bold text-gray-900">Ringkasan Pesanan</h2>
                     </div>
-                </div>
 
-                <div class="flex flex-col sm:flex-row sm:justify-end gap-6 sm:gap-12 text-xs sm:text-sm text-center sm:text-left">
-                    <div>
-                        <h3 class="font-bold mb-2 sm:mb-4 text-white text-sm sm:text-base">Website Kami</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li><a href="#" class="hover:text-white transition duration-200">Beranda</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Beri Masukan</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Tentang Kami</a></li>
-                        </ul>
+                    <div class="space-y-4 px-6 py-6 text-sm">
+                        <div class="flex justify-between gap-4">
+                            <span class="text-gray-600">Tanggal Kunjungan</span>
+                            <span id="summary-date" class="text-right font-medium text-gray-900">Pilih tanggal</span>
+                        </div>
+                        <div class="flex justify-between gap-4">
+                            <span class="text-gray-600">Jenis Tiket</span>
+                            <span id="summary-ticket" class="text-right font-medium text-gray-900">Domestik · Rp 5.000</span>
+                        </div>
+                        <div class="flex justify-between gap-4">
+                            <span class="text-gray-600">Jumlah Tiket</span>
+                            <span id="summary-quantity" class="text-right font-medium text-gray-900">1 tiket</span>
+                        </div>
+                        <div class="border-t border-dashed border-[#4A3627]/25"></div>
+                        <div class="flex justify-between gap-4">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span id="summary-subtotal" class="font-medium text-gray-900">Rp 5.000</span>
+                        </div>
+                        <div class="flex justify-between gap-4">
+                            <span class="text-gray-600">Biaya Layanan</span>
+                            <span id="summary-fee" class="font-medium text-gray-900">Rp 2.000</span>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-bold mb-2 sm:mb-4 text-white text-sm sm:text-base">Pusat Bantuan</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li><a href="#" class="hover:text-white transition duration-200">Hubungi Kami</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Kebijakan Cookie</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Kebijakan Privasi</a></li>
-                        </ul>
+
+                    <div class="mx-6 border-t border-dashed border-[#4A3627]/25"></div>
+                    <div class="px-6 py-5">
+                        <div class="flex items-end justify-between gap-4">
+                            <span class="font-semibold text-gray-800">Total Bayar</span>
+                            <span id="summary-total" class="font-display text-2xl font-bold text-[#4A3627]">Rp 7.000</span>
+                        </div>
+                        <button type="submit" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#4A3627] px-5 py-3.5 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-[#36271a] focus:outline-none focus:ring-2 focus:ring-[#4A3627] focus:ring-offset-2">
+                            <i class="fas fa-lock text-xs"></i>
+                            Bayar Sekarang
+                        </button>
+                        <p class="mt-3 text-center text-xs text-gray-500">Pembayaran Anda diproses dengan aman.</p>
                     </div>
-                </div>
-            </div>
+                </section>
+            </aside>
+        </form>
+    </div>
+</main>
 
-            <div class="bg-red-heritage text-center py-3 sm:py-4 text-xs text-white/90 px-4">
-                Copyright © Kampoeng Kadjoetangan Heritage 2025. Hak Cipta Dilindungi.
-            </div>
-        </footer>
-    </main>
+{{-- Checkout summary and selection interactions --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ticketForm = document.getElementById('ticket-booking-form');
+        if (!ticketForm) return;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ticketSelect = document.getElementById('ticketType');
-            const quantityInput = document.getElementById('quantity');
-            const totalDisplay = document.getElementById('totalDisplay');
+        var ticketCards = document.querySelectorAll('.ticket-card');
+        var paymentCards = document.querySelectorAll('.payment-card');
+        var quantityInput = document.getElementById('quantity-input');
+        var quantityDisplay = document.getElementById('quantity-display');
+        var dateInput = document.getElementById('visit-date');
+        var serviceFee = 2000;
 
-            function calculateTotal() {
-                const selectedOption = ticketSelect.options[ticketSelect.selectedIndex];
-                const price = parseInt(selectedOption.getAttribute('data-price')) || 0;
-                const qty = parseInt(quantityInput.value) || 1;
-                const total = price * qty;
-                totalDisplay.innerText = total.toLocaleString('id-ID'); 
+        function formatRupiah(amount) {
+            return 'Rp ' + amount.toLocaleString('id-ID');
+        }
+
+        function refreshSummary() {
+            var selectedTicket = ticketForm.querySelector('input[name="ticket_type"]:checked');
+            var ticketPrice = selectedTicket ? Number(selectedTicket.dataset.price) : 5000;
+            var quantity = Math.max(1, Number(quantityInput.value) || 1);
+            var subtotal = ticketPrice * quantity;
+            var ticketName = selectedTicket && selectedTicket.value === 'mancanegara' ? 'Mancanegara' : 'Domestik';
+
+            quantityInput.value = String(quantity);
+            quantityDisplay.textContent = String(quantity);
+            document.getElementById('summary-ticket').textContent = ticketName + ' · ' + formatRupiah(ticketPrice);
+            document.getElementById('summary-quantity').textContent = quantity + ' tiket';
+            document.getElementById('summary-subtotal').textContent = formatRupiah(subtotal);
+            document.getElementById('summary-fee').textContent = formatRupiah(serviceFee);
+            document.getElementById('summary-total').textContent = formatRupiah(subtotal + serviceFee);
+
+            if (dateInput.value) {
+                var date = new Date(dateInput.value + 'T00:00:00');
+                document.getElementById('summary-date').textContent = new Intl.DateTimeFormat('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                }).format(date);
+            } else {
+                document.getElementById('summary-date').textContent = 'Pilih tanggal';
             }
+        }
 
-            ticketSelect.addEventListener('change', calculateTotal);
-            quantityInput.addEventListener('input', calculateTotal);
-            
-            // Validasi form sebelum submit
-            const form = ticketSelect.closest('form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    if (ticketSelect.value === '0') {
-                        e.preventDefault();
-                        alert('Pilih jenis tiket terlebih dahulu!');
-                        return false;
-                    }
+        ticketCards.forEach(function (card) {
+            var radio = card.querySelector('input[name="ticket_type"]');
+            radio.addEventListener('change', function () {
+                ticketCards.forEach(function (item) {
+                    item.classList.remove('border-[#4A3627]', 'bg-[#4A3627]/5');
+                    item.classList.add('border-[#4A3627]/20', 'bg-[#FFFCF5]');
                 });
-            }
+                if (radio.checked) {
+                    card.classList.remove('border-[#4A3627]/20', 'bg-[#FFFCF5]');
+                    card.classList.add('border-[#4A3627]', 'bg-[#4A3627]/5');
+                }
+                refreshSummary();
+            });
         });
-    </script>
 
+        paymentCards.forEach(function (card) {
+            var radio = card.querySelector('input[name="payment_method"]');
+            radio.addEventListener('change', function () {
+                paymentCards.forEach(function (item) {
+                    item.classList.remove('border-[#4A3627]', 'bg-[#4A3627]/5');
+                    item.classList.add('border-[#4A3627]/20', 'bg-[#FFFCF5]');
+                });
+                if (radio.checked) {
+                    card.classList.remove('border-[#4A3627]/20', 'bg-[#FFFCF5]');
+                    card.classList.add('border-[#4A3627]', 'bg-[#4A3627]/5');
+                }
+            });
+        });
+
+        document.getElementById('quantity-minus').addEventListener('click', function () {
+            quantityInput.value = String(Math.max(1, Number(quantityInput.value) - 1));
+            refreshSummary();
+        });
+
+        document.getElementById('quantity-plus').addEventListener('click', function () {
+            quantityInput.value = String(Math.min(50, Number(quantityInput.value) + 1));
+            refreshSummary();
+        });
+
+        quantityInput.value = '1';
+        ticketForm.querySelector('input[name="ticket_type"]:checked').dispatchEvent(new Event('change'));
+        ticketForm.querySelector('input[name="payment_method"]:checked').dispatchEvent(new Event('change'));
+        dateInput.addEventListener('change', refreshSummary);
+        refreshSummary();
+    });
+</script>
 @endsection

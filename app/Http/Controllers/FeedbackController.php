@@ -33,17 +33,17 @@ class FeedbackController extends Controller
         $validated = $request->validate([
             'feedback_sender_name' => 'required|string|max:100',
             'feedback_label' => 'required|string|max:100',
-            'feedback_message_type' => 'required',
+            'feedback_message_type' => 'required|in:Pelayanan,Fasilitas,Kebersihan,Lainnya',
             'feedback_sender_email' => 'required|email|max:100',
-            'feedback_sender_message' => 'required|string',
+            'feedback_sender_message' => 'required|string|max:5000',
         ]);
 
         try {
             Feedback::create($validated);
         } catch (QueryException $e) {
-            return redirect(route('user.beranda.index'))->with('error', 'Terjadi Kesalahan Koneksi');
+            return back()->withInput()->with('error', 'Masukan belum dapat disimpan. Silakan coba kembali.');
         }
-        return redirect(route('user.beranda.index'))->with('success', 'Terima kasih atas masukan Anda!');
+        return redirect()->route('feedback.form')->with('success', 'Terima kasih atas masukan Anda!');
     }
 
     /**

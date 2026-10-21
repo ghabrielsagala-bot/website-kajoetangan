@@ -45,24 +45,26 @@
                     <input type="hidden" name="ticket_type" value="{{ $ticket_type }}">
                     <input type="hidden" name="total_price" value="{{ $total }}">
                     <input type="hidden" name="quantity" value="{{ $quantity }}">
+                    <input type="hidden" name="visit_date" value="{{ $visit_date }}">
+                    <input type="hidden" name="payment_method" value="{{ $payment_method }}">
 
                     <!-- Nama Lengkap -->
                     <div class="flex flex-col">
                         <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Nama Lengkap</label>
-                        <input type="text" name="name" required placeholder="Masukkan nama lengkap Anda" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
+                        <input type="text" name="name" value="{{ old('name', $name) }}" required placeholder="Masukkan nama lengkap Anda" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
                     </div>
 
                     <!-- Email -->
                     <div class="flex flex-col">
                         <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Email <span class="text-red-600">*</span></label>
-                        <input type="email" name="email" required placeholder="example@email.com" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
+                        <input type="email" name="email" value="{{ old('email', $email) }}" required placeholder="example@email.com" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
                     </div>
 
                     <!-- No HP & Jumlah Tiket (2 kolom di desktop) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div class="flex flex-col">
                             <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">No HP</label>
-                            <input type="tel" name="phone" placeholder="08xxxxxxxxxx" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
+                            <input type="tel" name="phone" value="{{ old('phone', $phone) }}" placeholder="08xxxxxxxxxx" class="w-full bg-beige-input border-none rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:outline-none text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-200 placeholder-gray-400">
                         </div>
 
                         <div class="flex flex-col">

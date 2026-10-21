@@ -75,18 +75,28 @@ Route::get('/pemesanan-tiket', function () {
     return view('user.Tiket.Pemesanantiket');
 })->name('pemesanan.tiket');
 Route::post('/pembayaran-tiket', function (Request $request) {
-    $request->validate([
-        'ticket_type' => 'required|not_in:0',
-        'quantity' => 'required|numeric|min:1',
+    $validated = $request->validate([
+        'name' => 'required|string|max:100',
+        'email' => 'required|email|max:100',
+        'phone' => 'required|string|max:30',
+        'visit_date' => 'required|date|after_or_equal:today',
+        'ticket_type' => 'required|in:lokal,mancanegara',
+        'quantity' => 'required|integer|min:1|max:50',
+        'payment_method' => 'required|in:qris,transfer,ewallet',
     ]);
 
-    $price = ($request->ticket_type == 'mancanegara') ? 10000 : 5000;
-    $total = $price * $request->quantity;
+    $price = $validated['ticket_type'] === 'mancanegara' ? 10000 : 5000;
+    $total = ($price * $validated['quantity']) + 2000;
 
     return view('user.Tiket.pembayarantiket', [
-        'quantity' => $request->quantity,
-        'ticket_type' => $request->ticket_type,
-        'total' => $total
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'phone' => $validated['phone'],
+        'visit_date' => $validated['visit_date'],
+        'payment_method' => $validated['payment_method'],
+        'quantity' => $validated['quantity'],
+        'ticket_type' => $validated['ticket_type'],
+        'total' => $total,
     ]);
 })->name('pembayaran.index');
 Route::post('/proses-pembayaran', function (Request $request) {

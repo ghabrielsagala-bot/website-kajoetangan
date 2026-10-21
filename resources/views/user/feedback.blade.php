@@ -1,195 +1,105 @@
-@extends('templates.user.user-template')
+@extends('Templates.User.User-template')
 
 @section('title')
-KKH | Feedback Page
+KKH | Beri Masukan
 @endsection
 
 @section('body')
-<main class="bg-gray-50 min-h-screen pt-8 pb-12">
-    
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Header Section -->
-        <div class="text-center mb-12 sm:mb-16 md:mb-20 w-full" data-aos="slide-up">
-            <div class="flex items-center justify-center mb-4 sm:mb-6">
-                <hr class="flex-1 border-gray-300">
-                <span class="px-4 text-gray-500 text-sm sm:text-base">
-                    <!-- Divider -->
-                </span>
-                <hr class="flex-1 border-gray-300">
-            </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight font-display">
-                Masukan & Saran
+<main class="flex-grow bg-[#FFFCF5] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+        <header class="mb-8 text-center sm:mb-10">
+            <span class="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#4A3627]/70">
+                <span class="h-px w-8 bg-[#B08D57]"></span>
+                Kampoeng Heritage Kajoetangan
+                <span class="h-px w-8 bg-[#B08D57]"></span>
+            </span>
+            <h1 class="font-display text-3xl font-bold leading-tight text-[#1B1815] sm:text-4xl md:text-5xl">
+                Suara Anda Membangun Kajoetangan
             </h1>
-            
-            <p class="text-gray-700 text-sm sm:text-base md:text-lg px-2 sm:px-4">
-                Masukan Anda sangat berharga bagi kami untuk terus berkembang
+            <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#4A3627]/75 sm:text-base">
+                Ceritakan pengalaman dan saran Anda. Setiap masukan membantu warga menjaga kampung heritage ini tetap nyaman dan berkesan.
             </p>
-        </div>
+        </header>
 
-        <!-- Form Section -->
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-start">
-            
-            <!-- Form Container (Left - 3 cols) -->
-            <div class="md:col-span-3" data-aos="slide-up">
-                <div class="bg-white rounded-2xl shadow-lg p-8 sm:p-10">
-                    
-                    <!-- Success Message -->
-                    @if (session('success'))
-                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg" data-aos="slide-up">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
-                            <p class="text-green-700 font-semibold">{{ session('success') }}</p>
-                        </div>
-                    </div>
-                    @endif
-
-                    <form action="{{ route('feedback.store') }}" method="POST" class="space-y-5 sm:space-y-6">
-                        @csrf
-
-                        <!-- Nama Lengkap -->
-                        <div class="flex flex-col" data-aos="slide-up">
-                            <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Nama Lengkap<span class="text-red-600">*</span></label>
-                            <input type="text" name="feedback_sender_name" required placeholder="Masukkan nama lengkap Anda" value="{{ old('feedback_sender_name') }}" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:border-transparent focus:outline-none text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200 placeholder-gray-400">
-                            @error('feedback_sender_name')
-                            <span class="mt-2 text-red-600 text-xs sm:text-sm flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Email -->
-                        <div class="flex flex-col" data-aos="slide-up">
-                            <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Alamat Email <span class="text-red-600">*</span></label>
-                            <input type="email" name="feedback_sender_email" required placeholder="example@email.com" value="{{ old('feedback_sender_email') }}" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:border-transparent focus:outline-none text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200 placeholder-gray-400 @error('feedback_sender_email') border-red-500 @enderror">
-                            @error('feedback_sender_email')
-                            <span class="mt-2 text-red-600 text-xs sm:text-sm flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Feedback Label -->
-                        <div class="flex flex-col" data-aos="slide-up">
-                            <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Label Masukan<span class="text-red-600">*</span></label>
-                            <input type="text" name="feedback_label" required placeholder="Contoh: Perbaikan Tanda Penunjuk Arah" value="{{ old('feedback_label') }}" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:border-transparent focus:outline-none text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200 placeholder-gray-400">
-                            @error('feedback_label')
-                            <span class="mt-2 text-red-600 text-xs sm:text-sm flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Feedback Message Type -->
-                        <div class="flex flex-col" data-aos="slide-up">
-                            <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Jenis Masukan <span class="text-red-600">*</span></label>
-                            <select name="feedback_message_type" required class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:border-transparent focus:outline-none text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200 @error('feedback_message_type') border-red-500 @enderror">
-                                <option value="" disabled selected>-- Pilih Jenis Masukan --</option>
-                                <option value="Saran" {{ old('feedback_message_type') === 'Saran' ? 'selected' : '' }}>Saran</option>
-                                <option value="Kritik" {{ old('feedback_message_type') === 'Kritik' ? 'selected' : '' }}>Kritik</option>
-                                <option value="Masukan" {{ old('feedback_message_type') === 'Masukan' ? 'selected' : '' }}>Masukan</option>
-                            </select>
-                            @error('feedback_message_type')
-                            <span class="mt-2 text-red-600 text-xs sm:text-sm flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Pesan/Feedback -->
-                        <div class="flex flex-col" data-aos="slide-up">
-                            <label class="mb-2 text-sm sm:text-base font-semibold text-gray-800">Pesan Anda <span class="text-red-600">*</span></label>
-                            <textarea name="feedback_sender_message" required rows="6" placeholder="Tulis pesan, masukan, atau kritik Anda di sini..." class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 sm:p-4 text-gray-700 focus:ring-2 focus:ring-amber-900 focus:border-transparent focus:outline-none text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200 resize-none placeholder-gray-400 @error('feedback_sender_message') border-red-500 @enderror">{{ old('feedback_sender_message') }}</textarea>
-                            @error('feedback_sender_message')
-                            <span class="mt-2 text-red-600 text-xs sm:text-sm flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="group w-full bg-amber-900 hover:bg-amber-700 active:scale-95 text-white text-base sm:text-lg font-semibold py-3 sm:py-4 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-amber-900/30 focus:outline-none mt-4 sm:mt-6" data-aos="slide-up">
-                            <i class="fas fa-paper-plane mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
-                            Kirim Pesan
-                        </button>
-                    </form>
+        <section class="rounded-2xl border border-[#4A3627]/10 bg-white p-6 shadow-lg shadow-[#4A3627]/10 sm:p-8 md:p-10">
+            @if (session('success'))
+                <div role="status" class="mb-6 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+                    <i class="fas fa-circle-check mt-0.5"></i>
+                    <p>{{ session('success') }}</p>
                 </div>
-            </div>
+            @endif
 
-            <!-- Info Section (Right - 2 cols) -->
-            <div class="md:col-span-2 space-y-6" data-aos="slide-up">
-                
-                <!-- Info Card 1 -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-100">
-                                <i class="fas fa-lightbulb text-amber-900 text-xl"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Saran</h3>
-                            <p class="text-gray-600 text-sm">Ide-ide cemerlang untuk meningkatkan pengalaman Anda</p>
-                        </div>
-                    </div>
+            @if (session('error'))
+                <div role="alert" class="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                    <i class="fas fa-circle-exclamation mt-0.5"></i>
+                    <p>{{ session('error') }}</p>
+                </div>
+            @endif
+
+            <form action="{{ route('feedback.store') }}" method="POST" class="space-y-5">
+                @csrf
+                <input type="hidden" name="feedback_label" value="{{ old('feedback_label', 'Masukan Pengunjung') }}">
+
+                <div>
+                    <label for="feedback-name" class="mb-2 block text-sm font-semibold text-[#1B1815]">
+                        Nama Lengkap <span class="text-red-700">*</span>
+                    </label>
+                    <input id="feedback-name" type="text" name="feedback_sender_name" value="{{ old('feedback_sender_name') }}" required maxlength="100" autocomplete="name" placeholder="Masukkan nama lengkap Anda"
+                        class="w-full rounded-xl border border-[#4A3627]/20 bg-[#FBF8F1] px-4 py-3 text-sm text-[#1B1815] placeholder:text-[#4A3627]/45 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                    @error('feedback_sender_name')
+                        <p class="mt-2 text-sm text-red-700">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <!-- Info Card 2 -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-100">
-                                <i class="fas fa-comments text-amber-900 text-xl"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Masukan</h3>
-                            <p class="text-gray-600 text-sm">Pendapat berharga untuk perbaikan berkelanjutan</p>
-                        </div>
-                    </div>
+                <div>
+                    <label for="feedback-email" class="mb-2 block text-sm font-semibold text-[#1B1815]">
+                        Email <span class="text-red-700">*</span>
+                    </label>
+                    <input id="feedback-email" type="email" name="feedback_sender_email" value="{{ old('feedback_sender_email') }}" required maxlength="100" autocomplete="email" placeholder="nama@email.com"
+                        class="w-full rounded-xl border border-[#4A3627]/20 bg-[#FBF8F1] px-4 py-3 text-sm text-[#1B1815] placeholder:text-[#4A3627]/45 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                    @error('feedback_sender_email')
+                        <p class="mt-2 text-sm text-red-700">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <!-- Info Card 3 -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-100">
-                                <i class="fas fa-bullhorn text-amber-900 text-xl"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Kritik</h3>
-                            <p class="text-gray-600 text-sm">Evaluasi jujur untuk kesempurnaan layanan kami</p>
-                        </div>
-                    </div>
+                <div>
+                    <label for="feedback-category" class="mb-2 block text-sm font-semibold text-[#1B1815]">
+                        Kategori Masukan <span class="text-red-700">*</span>
+                    </label>
+                    <select id="feedback-category" name="feedback_message_type" required
+                        class="w-full rounded-xl border border-[#4A3627]/20 bg-[#FBF8F1] px-4 py-3 text-sm text-[#1B1815] focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">
+                        <option value="" disabled {{ old('feedback_message_type') ? '' : 'selected' }}>Pilih kategori masukan</option>
+                        @foreach (['Pelayanan', 'Fasilitas', 'Kebersihan', 'Lainnya'] as $category)
+                            <option value="{{ $category }}" {{ old('feedback_message_type') === $category ? 'selected' : '' }}>{{ $category }}</option>
+                        @endforeach
+                    </select>
+                    @error('feedback_message_type')
+                        <p class="mt-2 text-sm text-red-700">{{ $message }}</p>
+                    @enderror
                 </div>
-            </div>
-        </div>
+
+                <div>
+                    <label for="feedback-message" class="mb-2 block text-sm font-semibold text-[#1B1815]">
+                        Pesan / Saran <span class="text-red-700">*</span>
+                    </label>
+                    <textarea id="feedback-message" name="feedback_sender_message" rows="4" required placeholder="Tuliskan pengalaman, saran, atau hal yang perlu kami perbaiki..."
+                        class="w-full resize-y rounded-xl border border-[#4A3627]/20 bg-[#FBF8F1] px-4 py-3 text-sm leading-relaxed text-[#1B1815] placeholder:text-[#4A3627]/45 focus:border-[#4A3627] focus:outline-none focus:ring-2 focus:ring-[#4A3627]">{{ old('feedback_sender_message') }}</textarea>
+                    @error('feedback_sender_message')
+                        <p class="mt-2 text-sm text-red-700">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit"
+                    class="w-full rounded-xl bg-[#4A3627] px-5 py-3.5 text-sm font-semibold text-[#FFFCF5] transition-transform hover:scale-[1.02] hover:bg-[#36271A] focus:outline-none focus:ring-2 focus:ring-[#4A3627] focus:ring-offset-2">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Kirim Masukan
+                </button>
+            </form>
+
+            <p class="mt-5 text-center text-xs leading-relaxed text-[#4A3627]/60">
+                Masukan Anda digunakan untuk membantu meningkatkan pelayanan dan menjaga kenyamanan pengunjung.
+            </p>
+        </section>
     </div>
 </main>
-
-<!-- CSS untuk Slide-up Animation -->
-<style>
-  [data-aos="slide-up"] {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-
-  [data-aos="slide-up"].animate-slide-up {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-
-<!-- Import Feedback Module Script -->
-<script type="module">
-  import './modules/Feedback.js';
-</script>
 @endsection

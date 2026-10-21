@@ -1,84 +1,70 @@
 @extends('Templates.User.User-template')
 
 @section('title')
-KKH | Kuliner Malang
+KKH | Kuliner Kajoetangan
 @endsection
 
 @section('body')
-<main class="bg-gray-50 min-h-screen py-6 sm:py-8 md:py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Back Button -->
-        <div class="mb-6 md:mb-8">
-            <a href="{{ route('user.beranda.index') }}" class="inline-flex items-center gap-2 px-4 py-2 text-amber-900 hover:bg-amber-50 rounded-lg transition-colors duration-300">
-                <i class="fas fa-arrow-left text-sm"></i>
-                <span class="text-sm font-medium">Kembali ke Beranda</span>
-            </a>
-        </div>
-
-        <!-- Header Section -->
-        <div class="text-center mb-10 sm:mb-12 md:mb-16">
-            <div class="flex items-center justify-center mb-4 sm:mb-6">
-                <hr class="flex-1 border-gray-300">
-                <span class="px-4 text-gray-500 text-sm sm:text-base">
-                    <!-- Divider -->
-                </span>
-                <hr class="flex-1 border-gray-300">
-            </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
-                Kuliner Khas Malang
-            </h1>
-            
-            <p class="text-gray-700 text-sm sm:text-base md:text-lg px-2 sm:px-4">
-                Jelajahi cita rasa autentik warisan kuliner Malang yang lezat dan menggugah selera
+<main class="min-h-screen bg-[#FFFCF5] px-4 py-12 font-body sm:px-6 sm:py-16 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <!-- KULINER SECTION -->
+        <header class="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#4A3627]">Jelajahi Kajoetangan</p>
+            <h1 class="font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl">Rasa Lokal, Cerita Heritage</h1>
+            <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-700 sm:text-base">
+                Singgah untuk menikmati sajian dan jajanan yang lekat dengan suasana kampung serta kuliner Malang.
             </p>
-        </div>
+        </header>
 
-        <!-- Grid List -->
-        @if($data->count() > 0)
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            @foreach($data as $kuliner)
-            <a href="{{ route('kuliner.show', $kuliner->kuliner_id) }}" class="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div class="relative overflow-hidden h-48 sm:h-56 md:h-64 bg-gray-200">
-                    <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}" 
-                         alt="{{ $kuliner->nama_kuliner }}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                </div>
-                
-                <div class="p-4 sm:p-5 md:p-6">
-                    <div class="flex items-start justify-between mb-2 gap-2">
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-900 transition-colors line-clamp-2 flex-1">
-                            {{ $kuliner->nama_kuliner }}
-                        </h3>
-                        <span class="flex-shrink-0 px-3 py-1 bg-amber-100 text-amber-800 text-xs sm:text-sm font-semibold rounded-full whitespace-nowrap">
-                            {{ $kuliner->jenis_kuliner }}
-                        </span>
+        @php
+            $featuredFoods = [
+                ['name' => 'Kopi Kajoetangan', 'badge' => 'Kopi lokal', 'image' => 'FOTO_KOPI_KAJOETANGAN_DISINI', 'description' => 'Nikmati secangkir kopi di tengah suasana kampung heritage dan deretan bangunan bersejarah.'],
+                ['name' => 'Onde-onde & Jajanan Pasar Tradisional', 'badge' => 'Jajanan tradisional', 'image' => 'FOTO_ONDE_ONDE_JAJANAN_PASAR_DISINI', 'description' => 'Camilan pasar yang akrab di Malang, cocok dinikmati sambil beristirahat menyusuri kawasan.'],
+                ['name' => 'Es Talun', 'badge' => 'Minuman segar', 'image' => 'FOTO_ES_TALUN_DISINI', 'description' => 'Pilihan minuman untuk menyegarkan diri setelah berjalan melewati lorong-lorong Kajoetangan.'],
+                ['name' => 'Ronde Titoni', 'badge' => 'Legendaris', 'image' => 'FOTO_RONDE_TITONI_DISINI', 'description' => 'Wedang ronde hangat khas Malang yang dikenal dengan kuah jahe serta isian ronde dan kacang.'],
+            ];
+        @endphp
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach ($featuredFoods as $food)
+                <article class="group overflow-hidden rounded-2xl border border-[#4A3627]/10 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:border-[#4A3627]/40 hover:shadow-2xl">
+                    <div class="relative h-56 overflow-hidden bg-[#F2EBDD] sm:h-64">
+                        <img src="{{ $food['image'] }}" alt="{{ $food['name'] }}" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute left-4 top-4 rounded-full border border-[#4A3627]/15 bg-[#FFFCF5]/95 px-3 py-1 text-xs font-semibold text-[#4A3627]">{{ $food['badge'] }}</span>
                     </div>
-                    
-                    <p class="text-gray-600 text-sm sm:text-base line-clamp-3 mb-4">
-                        {{ $kuliner->deskripsi_kuliner }}
-                    </p>
-                    
-                    <div class="flex items-center justify-between text-xs sm:text-sm text-gray-500">
-                        <span class="flex items-center gap-1">
-                            <i class="fas fa-calendar"></i>
-                            {{ $kuliner->updated_at->format('d M Y') }}
-                        </span>
-                        <span class="text-amber-900 font-semibold group-hover:translate-x-1 transition-transform">
-                            Pelajari →
-                        </span>
+                    <div class="p-5 sm:p-6">
+                        <h2 class="font-display text-xl font-bold text-gray-900">{{ $food['name'] }}</h2>
+                        <p class="mt-2 text-sm leading-relaxed text-gray-700">{{ $food['description'] }}</p>
+                        <div class="mt-5 border-t border-[#4A3627]/10 pt-4 text-xs text-gray-600">
+                            Kuliner dan pengalaman rasa di sekitar Kampoeng Heritage Kajoetangan.
+                        </div>
                     </div>
-                </div>
-            </a>
+                </article>
             @endforeach
         </div>
-        @else
-        <div class="bg-white rounded-lg shadow-md p-8 sm:p-12 text-center">
-            <i class="fas fa-info-circle text-4xl sm:text-5xl text-gray-300 mb-4"></i>
-            <p class="text-gray-600 text-base sm:text-lg">Data kuliner belum tersedia saat ini</p>
-        </div>
+
+        @if(isset($data) && $data->count())
+            <section class="mt-14" aria-labelledby="community-food-heading">
+                <div class="mb-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#4A3627]">Tambahan dari pengelola</p>
+                    <h2 id="community-food-heading" class="mt-2 font-display text-2xl font-bold text-gray-900">Kuliner Lainnya</h2>
+                </div>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach($data as $kuliner)
+                        <a href="{{ route('kuliner.show', $kuliner->kuliner_id) }}" class="group overflow-hidden rounded-2xl border border-[#4A3627]/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#4A3627]/40 hover:shadow-2xl">
+                            <div class="relative h-52 overflow-hidden bg-[#F2EBDD]">
+                                <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}" alt="{{ $kuliner->nama_kuliner }}" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                <span class="absolute left-4 top-4 rounded-full bg-[#FFFCF5]/95 px-3 py-1 text-xs font-semibold text-[#4A3627]">{{ $kuliner->jenis_kuliner }}</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-display text-lg font-bold text-gray-900">{{ $kuliner->nama_kuliner }}</h3>
+                                <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-gray-700">{{ $kuliner->deskripsi_kuliner }}</p>
+                                <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#4A3627]">Pelajari <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i></span>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </section>
         @endif
     </div>
 </main>

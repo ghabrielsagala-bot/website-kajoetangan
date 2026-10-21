@@ -1,196 +1,163 @@
-@extends('template')
+@extends('Templates.User.User-template')
 
-@section('main')
+@section('title')
+KKH | Tentang Kami
+@endsection
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
-        
-        .font-heritage { font-family: 'Playfair Display', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
-    </style>
+@section('body')
+<style>
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-up { opacity: 1; transform: translateY(0); transition: opacity .65s ease, transform .65s cubic-bezier(.16,1,.3,1); }
+    .js-reveal .fade-up { opacity: 0; transform: translateY(22px); }
+    .fade-up.show { opacity: 1; transform: translateY(0); }
+    .hero-img { object-fit: cover; object-position: center 38%; }
+    .glass-card { box-shadow: 0 20px 40px -16px rgba(74,54,39,.3), 0 2px 6px -2px rgba(27,24,21,.06); }
+    @media (prefers-reduced-motion: reduce) { .fade-up { transition: none; animation: none; } }
+</style>
 
-    <main class="bg-white font-body">
-        
-        <!-- Hero Section dengan Background Image -->
-        <section class="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1576610616656-570eda14fbf0?w=1200&h=600&fit=crop" 
-                 alt="Kampung Kajoetangan Heritage" 
-                 class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/30"></div>
-                </div>
+<main class="flex-grow min-h-screen bg-[#FFFCF5] pb-16 font-body sm:pb-20">
+    {{-- HERO --}}
+    <section
+        class="fade-up relative flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-cover bg-center px-4 py-20 text-center sm:px-6"
+        style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/23/COLLECTIE_TROPENMUSEUM_De_Kajoetangan_straat_in_Malang_Oost-Java_TMnr_60052028.jpg');"
+        aria-label="Kampoeng Heritage Kajoetangan"
+    >
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a130f] via-[#1a130f]/55 to-transparent"></div>
+        <div class="relative z-10 mx-auto max-w-4xl">
+            <span class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#FFFCF5]/20 bg-[#FFFCF5]/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-[#FFFCF5]/85">
+                <i class="fas fa-compass-drafting"></i> Kampoeng Heritage Kajoetangan
+            </span>
+            <h1 class="font-display text-4xl font-bold leading-tight text-white drop-shadow-lg sm:text-5xl md:text-6xl">
+                Menyelusuri Lorong Waktu Kajoetangan
+            </h1>
+            <p class="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-white/85 sm:text-lg">
+                Dari pusat perdagangan era kolonial hingga kampung heritage yang dibangun warga...
+            </p>
+        </div>
+    </section>
+
+    <div class="mx-auto max-w-7xl px-4 pt-10 sm:px-6 sm:pt-14 lg:px-8">
+
+        {{-- INTRO BANNER --}}
+        <div class="text-center mb-12 sm:mb-16 fade-up" style="transition-delay:.1s">
+            <p class="text-[#4A3627]/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                Jalan Basuki Rahmat, yang dahulu dikenal sebagai Jalan Kajoetangan, merupakan salah satu koridor perdagangan penting di Malang pada masa kolonial. Kini, warisan kawasan ini dirawat dan dihidupkan kembali bersama oleh masyarakat setempat.
+            </p>
+            <div class="mt-5 flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+                <span class="px-3 py-1.5 rounded-full bg-[#4A3627]/8 border border-[#4A3627]/15 text-[#4A3627] font-medium">Revitalisasi 2018</span>
+                <span class="px-3 py-1.5 rounded-full bg-[#4A3627]/8 border border-[#4A3627]/15 text-[#4A3627] font-medium">Pokdarwis Kajoetangan</span>
+                <span class="px-3 py-1.5 rounded-full bg-[#4A3627]/8 border border-[#4A3627]/15 text-[#4A3627] font-medium">Heritage Malang</span>
             </div>
-        </section>
+        </div>
 
-        <!-- About Us Section -->
-        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-gray-50">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-heritage font-bold text-center text-black mb-8 sm:mb-12">
-                    About Us
-                </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
-                    <!-- Text Content -->
-                    <div class="order-2 md:order-1">
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
-                            Berawal dari rencana untuk menjangkau para pelaku UMKM di sekitar kawasan Kajoetangan, kami menggerakkan berbagai inisiatif untuk memperkuat perekonomian lokal dan pelestarian budaya warisan setempat. Lewat program Community Based Tourism (CBT), kami memfasilitasi akses pasar dan mengoptimalkan potensi wisata budaya yang ada.
-                        </p>
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
-                            Dengan dukungan berbagai pihak, kami terus berinovasi dan berkomitmen untuk memberikan pengalaman wisata yang autentik, edukatif, dan berkelanjutan bagi setiap pengunjung yang datang ke Kampung Kajoetangan.
-                        </p>
+            {{-- KOLOM KIRI: Sejarah --}}
+            <div class="fade-up" style="transition-delay:.2s">
+                <div class="bg-white rounded-2xl border border-[#4A3627]/10 p-6 sm:p-8 md:p-10 glass-card h-full">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-10 h-10 rounded-full bg-[#4A3627] text-[#FFFCF5] text-sm font-bold flex items-center justify-center">
+                            <i class="fas fa-scroll text-xs"></i>
+                        </span>
+                        <h2 class="font-display text-xl sm:text-2xl font-bold text-[#1B1815]">Sejarah Kajoetangan</h2>
                     </div>
-
-                    <!-- Image -->
-                    <div class="order-1 md:order-2">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop" 
-                             alt="Tentang Kami" 
-                             class="w-full h-64 sm:h-80 object-cover rounded-lg shadow-lg">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sejarah & Identitas Kami -->
-        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-heritage font-bold text-center text-black mb-12 sm:mb-16">
-                    Sejarah &amp; Identitas Kami
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-                    <!-- Image -->
-                    <div class="order-2 md:order-1">
-                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=500&h=400&fit=crop" 
-                             alt="Sejarah Kajoetangan" 
-                             class="w-full h-64 sm:h-80 object-cover rounded-lg shadow-lg">
-                    </div>
-
-                    <!-- Text Content -->
-                    <div class="order-1 md:order-2">
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
-                            Pelopor bergerak dari tiga orang anak muda UMKM dan perkampungan Kajoetangan, semuanya diajarkan melalui pelatihan dan pendampingan dari berbagai lembaga terkait yang peduli terhadap pengembangan pariwisataan dan pemberdayaan ekonomi lokal.
-                        </p>
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
-                            Identitas kami sebagai komunitas pelestari warisan budaya tercermin dalam setiap aspek kehidupan kampung yang masih mempertahankan nilai-nilai tradisional dan kearifan lokal. Dengan mengintegrasikan modernitas dan tradisi, kami menciptakan destinasi wisata yang unik dan berkesan.
-                        </p>
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
-                            Setiap rumah, setiap sudut jalan, dan setiap aktivitas masyarakat menceritakan kisah yang kaya akan makna historis dan budaya yang patut untuk dilestarikan dan dibagikan kepada generasi mendatang.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Visi & Misi -->
-        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-gray-50">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-                    <!-- Visi -->
-                    <div>
-                        <h3 class="text-2xl sm:text-3xl font-heritage font-bold text-black mb-4">Visi</h3>
-                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
-                            Mewujudkan wisata berkelas yang mengangkat nilai-nilai budaya lokal dan mampu memberdayakan masyarakat sekitarnya sehingga menciptakan ekonomi yang berkelanjutan bagi generasi sekarang dan masa depan.
-                        </p>
-                    </div>
-
-                    <!-- Misi -->
-                    <div>
-                        <h3 class="text-2xl sm:text-3xl font-heritage font-bold text-black mb-4">Misi</h3>
-                        <ul class="text-gray-700 text-sm sm:text-base leading-relaxed space-y-2">
-                            <li>1. Menghadirkan informasi yang akurat dan menarik tentang potensi wisata Kajoetangan</li>
-                            <li>2. Memfasilitasi kerjasama antar pelaku usaha dan komunitas lokal</li>
-                            <li>3. Menyediakan platform digital untuk meningkatkan aksesibilitas produk lokal</li>
-                            <li>4. Mendukung pelestarian warisan budaya melalui program-program berkelanjutan</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Team -->
-        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-heritage font-bold text-center text-black mb-12 sm:mb-16">
-                    Our Team
-                </h2>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Team Member 1 -->
-                    <div class="text-center">
-                        <div class="mb-4 overflow-hidden rounded-lg h-64 sm:h-72">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" 
-                                 alt="Team Member" 
-                                 class="w-full h-full object-cover">
+                    <div class="space-y-4 text-[#1B1815]/90 text-sm sm:text-base leading-relaxed">
+                        <p>Jalan Basuki Rahmat, yang dahulu dikenal sebagai <strong class="text-[#4A3627]">Jalan Kajoetangan</strong>, berkembang sebagai koridor penting Kota Malang pada awal abad ke-20. Pada masa pemerintahan kolonial Belanda, kawasan ini tumbuh dengan deretan pertokoan dan bangunan yang mencerminkan perkembangan kota.</p>
+                        <p>Kajoetangan menjadi <strong class="text-[#4A3627]">pusat perdagangan</strong> yang mempertemukan warga dan pedagang dari berbagai latar belakang. Bangunan bergaya kolonial, termasuk unsur Indo-Eropa dan Art Deco, masih menjadi bagian dari karakter arsitektur kawasan ini.</p>
+                        <p>Banyak bangunan dengan gaya Indo-Eropa, Art Deco, dan arsitektur kolonial lainnya yang tumbuh di sepanjang lorong ini, menjadikannya situs bersejarah yang merefleksikan masa lalu perniagaan dan pertemuan budaya di Malang.</p>
+                        <div class="mt-4 flex flex-wrap gap-4 text-xs sm:text-sm text-[#4A3627]/70 bg-[#F7F3EA] rounded-xl p-4 border border-[#4A3627]/10">
+                            <div class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-[#4A3627]/10 text-[#4A3627] text-xs font-bold flex items-center justify-center">1900</span> <span>Koridor perdagangan berkembang</span></div>
+                            <div class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-[#4A3627]/10 text-[#4A3627] text-xs font-bold flex items-center justify-center">1920</span> <span>Bangunan kolonial membentuk wajah kawasan</span></div>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">Nama Anggota 1</h3>
-                        <p class="text-gray-600 text-xs sm:text-sm">Posisi/Role</p>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Team Member 2 -->
-                    <div class="text-center">
-                        <div class="mb-4 overflow-hidden rounded-lg h-64 sm:h-72">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" 
-                                 alt="Team Member" 
-                                 class="w-full h-full object-cover">
+            {{-- KOLOM KANAN: Revitalisasi --}}
+            <div class="fade-up" style="transition-delay:.3s">
+                <div class="bg-[#F7F3EA] rounded-2xl border border-[#4A3627]/15 p-6 sm:p-8 md:p-10 h-full">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-10 h-10 rounded-full bg-[#B08D57] text-[#1B1815] text-sm font-bold flex items-center justify-center">
+                            <i class="fas fa-people-arrows text-xs"></i>
+                        </span>
+                        <h2 class="font-display text-xl sm:text-2xl font-bold text-[#1B1815]">Revitalisasi Kajoetangan</h2>
+                    </div>
+                    <div class="space-y-4 text-[#1B1815]/90 text-sm sm:text-base leading-relaxed">
+                        <p>Kembali ke tahun <strong class="text-[#4A3627]">2018</strong>, warga setempat dan <strong class="text-[#4A3627]">Kelompok Sadar Wisata (Pokdarwis) Kajoetangan</strong> memutuskan untuk merevitalisasi kampung ini. Dengan solidaritas warga, mereka membersihkan lorong dari sampah, mengecat ulang bangunan rumah-rumah yang mulai pudar, dan menata ulang ruang publik agar lebih asri dan layak dikunjungi.</p>
+                        <p>Upaya tersebut menghidupkan kembali lingkungan kampung dan membuka ruang bagi wisatawan untuk mengenal sejarah serta kehidupan warga Kajoetangan secara langsung.</p>
+                        <p>Hingga kini, warga terus merawat kawasan dan mengembangkan kegiatan wisata berbasis komunitas. Homestay, kuliner, serta pengalaman budaya turut membuka peluang ekonomi lokal tanpa melepaskan identitas heritage kampung.</p>
+                        <div class="mt-4 flex flex-wrap gap-4 text-xs sm:text-sm text-[#4A3627]/70 bg-[#FFF8E7] rounded-xl p-4 border border-[#B08D57]/20">
+                            <div class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-[#B08D57]/15 text-[#4A3627] text-xs font-bold flex items-center justify-center">2018</span> <span>Pokdarwis mulai revitalisasi</span></div>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">Nama Anggota 2</h3>
-                        <p class="text-gray-600 text-xs sm:text-sm">Posisi/Role</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- VISI & MISI --}}
+        <section class="mt-14 sm:mt-18 relative overflow-hidden">
+            <div class="relative bg-[#F2EBDD] rounded-2xl p-8 sm:p-10 md:p-12 border border-[#4A3627]/15 shadow-xl">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-10 sm:mb-12">
+                        <span class="inline-block w-16 h-[2px] bg-[#B08D57] mb-4"></span>
+                        <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-[#1B1815]">Visi &amp; Misi Kami</h2>
+                        <p class="mt-3 text-[#4A3627]/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">Kepedulian warga terhadap peninggalan sejarah dan pemberdayaan ekonomi lokal menjadi landasan setiap langkah kami.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <div class="bg-[#FFFCF5] rounded-xl p-6 sm:p-7 border border-[#4A3627]/15">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="w-9 h-9 rounded-full bg-[#4A3627]/10 text-[#4A3627] text-sm font-bold flex items-center justify-center">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                                <h3 class="font-display text-base sm:text-lg font-bold text-[#1B1815]">Visi</h3>
+                            </div>
+                            <p class="text-[#1B1815]/85 text-sm sm:text-base leading-relaxed">
+                                Menjadi kampung heritage yang hidup dan berkelanjutan, di mana warisan sejarah Kajoetangan tetap lestari, masyarakat lokal berdaya, dan setiap pengunjung merasakan keindahan masa lalu yang terhidupkan kembali.
+                            </p>
+                        </div>
+                        <div class="bg-[#FFFCF5] rounded-xl p-6 sm:p-7 border border-[#4A3627]/15">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="w-9 h-9 rounded-full bg-[#4A3627]/10 text-[#4A3627] text-sm font-bold flex items-center justify-center">
+                                    <i class="fas fa-bullseye"></i>
+                                </span>
+                                <h3 class="font-display text-base sm:text-lg font-bold text-[#1B1815]">Misi</h3>
+                            </div>
+                            <ul class="space-y-3 text-[#1B1815]/85 text-sm sm:text-base leading-relaxed">
+                                <li class="flex gap-3"><span class="text-[#B08D57] mt-0.5"><i class="fas fa-check-circle text-sm"></i></span> Melestarikan dan memulihkan arsitektur serta suasana historis Jalan Basuki Rahmat.</li>
+                                <li class="flex gap-3"><span class="text-[#B08D57] mt-0.5"><i class="fas fa-check-circle text-sm"></i></span> Memberdayakan warga lokal melalui pariwisata, homestay, kuliner, serta ekonomi kreatif.</li>
+                                <li class="flex gap-3"><span class="text-[#B08D57] mt-0.5"><i class="fas fa-check-circle text-sm"></i></span> Menyediakan pengalaman wisata yang edukatif, autentik, dan berpusat pada masyarakat.</li>
+                                <li class="flex gap-3"><span class="text-[#B08D57] mt-0.5"><i class="fas fa-check-circle text-sm"></i></span> Menjaga kebersihan, kenyamanan, dan keamanan bagi pengunjung sekaligus warga.</li>
+                                <li class="flex gap-3"><span class="text-[#B08D57] mt-0.5"><i class="fas fa-check-circle text-sm"></i></span> Berkolaborasi dengan pemerintah, komunitas, dan mitra untuk mendukung pariwisata berkelanjutan.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="bg-amber-900 text-white pt-10 sm:pt-12 md:pt-16">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 pb-8 sm:pb-12">
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <h2 class="font-heritage text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Kampoeng Kadjoetangan Heritage</h2>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-xs mb-4 sm:mb-6">
-                        Warisan budaya dan sejarah yang kaya dari Malang, menampilkan keindahan arsitektur kolonial dan kehidupan tradisional yang masih terjaga.
-                    </p>
-                    
-                    <div class="border-t border-white/20 w-24 mb-3 sm:mb-4"></div>
-                    <p class="text-xs text-gray-300 mb-2 sm:mb-3">Media Sosial Kami</p>
-                    
-                    <div class="flex space-x-2 sm:space-x-3 justify-center md:justify-start">
-                        <a href="#" class="bg-white text-amber-900 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="YouTube">
-                            <i class="fab fa-youtube text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-amber-900 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Instagram">
-                            <i class="fab fa-instagram text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-amber-900 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Twitter">
-                            <i class="fab fa-twitter text-sm"></i>
-                        </a>
-                        <a href="#" class="bg-white text-amber-900 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded hover:bg-gray-200 transition" title="Facebook">
-                            <i class="fab fa-facebook text-sm"></i>
-                        </a>
-                    </div>
-                </div>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elements = document.querySelectorAll('.fade-up');
 
-                <div class="flex flex-col sm:flex-row sm:justify-end gap-6 sm:gap-12 text-xs sm:text-sm text-center sm:text-left">
-                    <div>
-                        <h3 class="font-bold mb-2 sm:mb-4 text-white text-sm sm:text-base">Website Kami</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li><a href="#" class="hover:text-white transition duration-200">Beranda</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Beri Masukan</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Tentang Kami</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-2 sm:mb-4 text-white text-sm sm:text-base">Pusat Bantuan</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li><a href="#" class="hover:text-white transition duration-200">Hubungi Kami</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Kebijakan Cookie</a></li>
-                            <li><a href="#" class="hover:text-white transition duration-200">Kebijakan Privasi</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            elements.forEach(function (element) { element.classList.add('show'); });
+            return;
+        }
 
-            <div class="bg-red-700 text-center py-3 sm:py-4 text-xs text-white/90 px-4">
-                Copyright © Kampoeng Kadjoetangan Heritage 2025. Hak Cipta Dilindungi.
-            </div>
-        </footer>
-    </main>
+        document.documentElement.classList.add('js-reveal');
+        var observer = new IntersectionObserver(function (entries, currentObserver) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    currentObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
 
+        elements.forEach(function (element) { observer.observe(element); });
+    });
+</script>
 @endsection
